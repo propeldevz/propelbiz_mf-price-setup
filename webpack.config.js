@@ -7,7 +7,7 @@ module.exports = {
   output: {
     publicPath: "auto",
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash].js",
+    filename: "price-setup",
     clean: true,
   },
   resolve: {
@@ -51,7 +51,10 @@ module.exports = {
       name: "priceSetup",
       filename: "remoteEntry.js",
       remotes: {
-        uiLibrary: "uiLibrary@http://localhost:3001/remoteEntry.js",
+        uiLibrary: `uiLibrary@${
+          process.env.BASE_URL + "/pricebook/price-setup" ||
+          "http://localhost:3001"
+        }/remoteEntry.js`,
       },
       exposes: {
         "./Page": "./src/Page.jsx",
