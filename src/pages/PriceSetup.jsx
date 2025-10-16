@@ -59,7 +59,7 @@ const PriceSetupResult = () => {
                   <Suspense fallback={<div className="h-64 bg-gray-200 rounded animate-pulse"></div>}>
 
                      {/* Custom Table with Column Grouping */}
-                     <div className="overflow-x-auto rounded-xl border border-[#E5E7EB]">
+                     <div className="overflow-x-auto rounded-xl border border-[#E5E7EB] custom-scrollbar">
                         <table className="w-full border-collapse">
                            <thead>
                               {/* Column Group Headers */}
