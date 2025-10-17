@@ -1,6 +1,16 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
+const dotenv = require("dotenv");
+
+// Load environment variables from .env file
+dotenv.config({ path: path.resolve(__dirname, ".env") });
+
+// Dynamic remote URLs - use environment variable or fallback to localhost
+const getRemoteUrl = (productionPath, port) =>
+  process.env.NODE_ENV === "development"
+    ? `${process.env.BASE_URL}:${port}/remoteEntry.js`
+    : `${process.env.BASE_URL}${productionPath}/remoteEntry.js`;
 
 module.exports = {
   entry: "./src/index.jsx",
@@ -51,9 +61,7 @@ module.exports = {
       name: "priceSetup",
       filename: "remoteEntry.js",
       remotes: {
-        uiLibrary: `uiLibrary@${
-          (process.env.BASE_URL ? process.env.BASE_URL + "/uiLibrary" : "http://localhost:3001")
-        }/remoteEntry.js`,
+        uiLibrary: `uiLibrary@${getRemoteUrl("/uiLibrary", 3001)}`,
       },
       exposes: {
         "./Page": "./src/Page.jsx",
