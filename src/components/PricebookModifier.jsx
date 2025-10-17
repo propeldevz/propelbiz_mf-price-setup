@@ -42,7 +42,6 @@ const PricebookModifier = ({ title, onNext }) => {
                            value={billableRate}
                            onChange={(e) => setBillableRate(e.target.value)}
                            placeholder="$ 0"
-                           className="!h-[32px] w-[120px]"
                         />
                      </Suspense>
                      <div className="mt-1">
@@ -67,7 +66,6 @@ const PricebookModifier = ({ title, onNext }) => {
                            value={primarySurchargeDollar}
                            onChange={(e) => setPrimarySurchargeDollar(e.target.value)}
                            placeholder="$ 0"
-                           className="!h-[32px] w-[120px]"
                         />
                      </Suspense>
                   </div>
@@ -87,7 +85,6 @@ const PricebookModifier = ({ title, onNext }) => {
                            value={primarySurchargePercent}
                            onChange={(e) => setPrimarySurchargePercent(e.target.value)}
                            placeholder="% 0"
-                           className="!h-[32px] w-[120px]"
                         />
                      </Suspense>
                   </div>
@@ -107,7 +104,6 @@ const PricebookModifier = ({ title, onNext }) => {
                            value={memberDiscount}
                            onChange={(e) => setMemberDiscount(e.target.value)}
                            placeholder="0"
-                           className="!h-[32px] w-[60px]"
                         />
                      </Suspense>
                      <span className="ml-1 text-[14px] text-[#222525]">%</span>
@@ -174,7 +170,6 @@ const PricebookModifier = ({ title, onNext }) => {
                            value={addOnBillableRate}
                            onChange={(e) => setAddOnBillableRate(e.target.value)}
                            placeholder="$ 0"
-                           className="!h-[32px] w-[120px]"
                         />
                      </Suspense>
                      <div className="mt-1">
@@ -199,7 +194,6 @@ const PricebookModifier = ({ title, onNext }) => {
                            value={addOnSurchargePercent}
                            onChange={(e) => setAddOnSurchargePercent(e.target.value)}
                            placeholder="$ 0"
-                           className="!h-[32px] w-[120px]"
                         />
                      </Suspense>
                   </div>
@@ -219,7 +213,6 @@ const PricebookModifier = ({ title, onNext }) => {
                            value={addOnSurchargeDollar}
                            onChange={(e) => setAddOnSurchargeDollar(e.target.value)}
                            placeholder="% 0"
-                           className="!h-[32px] w-[120px]"
                         />
                      </Suspense>
                   </div>
@@ -239,7 +232,6 @@ const PricebookModifier = ({ title, onNext }) => {
                            value={addOnMemberDiscount}
                            onChange={(e) => setAddOnMemberDiscount(e.target.value)}
                            placeholder="0"
-                           className="!h-[32px] w-[60px]"
                         />
                      </Suspense>
                      <span className="ml-1 text-[14px] text-[#222525]">%</span>
@@ -254,7 +246,6 @@ const PricebookModifier = ({ title, onNext }) => {
                <Button
                   variant="primary"
                   size="md"
-                  // className="px-8 !text-[14px] !font-[500] uppercase"
                   onClick={onNext}
                >
                   Next

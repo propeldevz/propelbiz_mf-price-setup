@@ -52,8 +52,7 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {
         uiLibrary: `uiLibrary@${
-          process.env.BASE_URL + "/pricebook/price-setup" ||
-          "http://localhost:3001"
+          (process.env.BASE_URL ? process.env.BASE_URL + "/uiLibrary" : "http://localhost:3001")
         }/remoteEntry.js`,
       },
       exposes: {
