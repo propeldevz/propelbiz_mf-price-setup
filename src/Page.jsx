@@ -147,7 +147,7 @@ function ServiceCategorySelection() {
    ];
 
    const handleNextClick = () => {
-      navigate('/pricebook/price-setup/result');
+      navigate('result');
    };
 
    return (

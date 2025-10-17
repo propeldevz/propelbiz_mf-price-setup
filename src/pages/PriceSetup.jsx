@@ -39,7 +39,7 @@ const PriceSetupResult = () => {
                         <Button
                            variant="outline"
                            size="md"
-                           onClick={() => navigate('/pricebook/price-setup')}
+                           onClick={() => navigate('..')}
                         >
                            Go Back
                         </Button>
