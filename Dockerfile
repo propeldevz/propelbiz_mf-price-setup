@@ -7,7 +7,6 @@ COPY package.json package-lock.json* ./
 
 # Install dependencies
 RUN npm install -f
-RUN npm install -g webpack webpack-cli
 
 # Copy source code
 COPY . .
