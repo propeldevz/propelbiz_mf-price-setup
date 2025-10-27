@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --prefer-offline --no-audit
 
 # Copy source code
 COPY . .
