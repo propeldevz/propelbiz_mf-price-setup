@@ -42,8 +42,7 @@ const materialCategories = [
 
 // Mock table data
 
-function CategorySelector({ categories, title }) {
-   const [selectedCategories, setSelectedCategories] = useState(['1']);
+function CategorySelector({ categories, title, selectedCategories, setSelectedCategories, showError, setShowError }) {
    const [expandedCategories, setExpandedCategories] = useState({});
 
    const toggleCategory = (categoryId) => {
@@ -55,16 +54,25 @@ function CategorySelector({ categories, title }) {
 
    const toggleSelection = (categoryId) => {
       const catId = `${categoryId}`;
-      setSelectedCategories(prev =>
-         prev.includes(catId)
+      setSelectedCategories(prev => {
+         const newSelection = prev.includes(catId)
             ? prev.filter(id => id !== catId)
-            : [...prev, catId]
-      );
+            : [...prev, catId];
+
+         if (newSelection.length > 0 && showError) {
+            setShowError(false);
+         }
+
+         return newSelection;
+      });
    };
 
    const toggleSelectAll = (checked) => {
       if (checked) {
          setSelectedCategories(categories.map(cat => `${cat.id}`));
+         if (showError) {
+            setShowError(false);
+         }
       } else {
          setSelectedCategories([]);
       }
@@ -132,6 +140,13 @@ function CategorySelector({ categories, title }) {
                </div>
             ))}
          </div>
+
+         {/* Error Message */}
+         {showError && selectedCategories.length === 0 && (
+            <div className="mt-2">
+               <p className="text-red-500 text-[14px]">This is required field</p>
+            </div>
+         )}
       </div>
    );
 }
@@ -140,6 +155,9 @@ function ServiceCategorySelection() {
    const navigate = useNavigate();
    const location = useLocation();
    const [activeTab, setActiveTab] = useState('services');
+   const [selectedServiceCategories, setSelectedServiceCategories] = useState(['1']); // HVAC pre-selected
+   const [selectedMaterialCategories, setSelectedMaterialCategories] = useState([]);
+   const [showError, setShowError] = useState(false);
 
    const tabs = [
       { key: 'services', label: 'Services' },
@@ -147,6 +165,15 @@ function ServiceCategorySelection() {
    ];
 
    const handleNextClick = () => {
+      // Validate based on active tab
+      const currentCategories = activeTab === 'services' ? selectedServiceCategories : selectedMaterialCategories;
+
+      if (currentCategories.length === 0) {
+         setShowError(true);
+         return;
+      }
+
+      setShowError(false);
       navigate('result');
    };
 
@@ -179,14 +206,28 @@ function ServiceCategorySelection() {
                                  {activeTab === 'services' && (
                                     <>
                                        <h2 className="text-[20px] font-semibold text-[#222525] mb-4">Services</h2>
-                                       <CategorySelector categories={serviceCategories} title="Services" />
+                                       <CategorySelector
+                                          categories={serviceCategories}
+                                          title="Services"
+                                          selectedCategories={selectedServiceCategories}
+                                          setSelectedCategories={setSelectedServiceCategories}
+                                          showError={showError}
+                                          setShowError={setShowError}
+                                       />
                                     </>
                                  )}
 
                                  {activeTab === 'materials' && (
                                     <>
                                        <h2 className="text-[20px] font-semibold text-[#222525] mb-4">Materials</h2>
-                                       <CategorySelector categories={materialCategories} title="Materials" />
+                                       <CategorySelector
+                                          categories={materialCategories}
+                                          title="Materials"
+                                          selectedCategories={selectedMaterialCategories}
+                                          setSelectedCategories={setSelectedMaterialCategories}
+                                          showError={showError}
+                                          setShowError={setShowError}
+                                       />
                                     </>
                                  )}
                               </div>
